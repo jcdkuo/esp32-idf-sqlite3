@@ -171,7 +171,7 @@ int shox96_0_2_compress(const char *in, int len, char *out, struct lnk_lst *prev
   byte state;
 
   int l, ll, ol;
-  char c_in, c_next, c_prev;
+  unsigned char c_in, c_next, c_prev;
   byte is_upper, is_all_upper;
 
   ol = 0;
@@ -382,7 +382,7 @@ int shox96_0_2_decompress(const char *in, int len, char *out, struct lnk_lst *pr
   out[ol] = 0;
   while (bit_no < len) {
     int h, v;
-    char c;
+    char c = 0;
     byte is_upper = is_all_upper;
     int orig_bit_no = bit_no;
     v = getCodeIdx(vcode, in, len, &bit_no);
