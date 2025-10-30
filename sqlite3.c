@@ -22517,18 +22517,9 @@ static malloc_zone_t* _sqliteZone_;
 ** Use standard C library malloc and free on non-Apple systems.  
 ** Also used by Apple systems if SQLITE_WITHOUT_ZONEMALLOC is defined.
 */
-// #define SQLITE_MALLOC(x)             malloc(x)
-// #define SQLITE_FREE(x)               free(x)
-// #define SQLITE_REALLOC(x,y)          realloc((x),(y))
-
-/*
-** Use esp library malloc and free on UA-Ultra related series.  
-** To ensure that database-related operations can utilize internal memory for enhanced speed
-*/
-#include "esp_heap_caps.h"
-#define SQLITE_MALLOC(x)             heap_caps_malloc_prefer(x, 2, MALLOC_CAP_INTERNAL|MALLOC_CAP_8BIT, MALLOC_CAP_SPIRAM|MALLOC_CAP_DEFAULT)
-#define SQLITE_FREE(x)               heap_caps_free(x)
-#define SQLITE_REALLOC(x,y)          heap_caps_realloc_prefer((x), (y), 2, MALLOC_CAP_INTERNAL|MALLOC_CAP_8BIT, MALLOC_CAP_SPIRAM|MALLOC_CAP_DEFAULT)
+#define SQLITE_MALLOC(x)             malloc(x)
+#define SQLITE_FREE(x)               free(x)
+#define SQLITE_REALLOC(x,y)          realloc((x),(y))
 
 /*
 ** The malloc.h header file is needed for malloc_usable_size() function
